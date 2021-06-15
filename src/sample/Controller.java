@@ -39,8 +39,9 @@ public class Controller {
         treatmentParse();
         treatmentCount();
         status.setText(" Статус: успех");
-        for (String s:wodrs){
-            System.out.println(s);
+        for (WordCount w:wordCounts){
+            //System.out.println(w.getWord()+"-"+w.getCount());
+            phrases.setText(phrases.getText()+w.getWord()+"-"+w.getCount()+"\n");
         }
     }
 
@@ -104,8 +105,20 @@ public class Controller {
     }
 
     private void treatmentCount() throws Exception{
-
-
+        for (String s:wodrs){
+            boolean repeat=false;
+            if(wordCounts!=null){
+                for (WordCount w:wordCounts){
+                    if (w.getWord().equals(s)){
+                        repeat=true;
+                        w.setCount(w.getCount()+1);
+                    }
+                }
+            }
+            if (repeat==false){
+                wordCounts.add(new WordCount(s, 1));
+            }
+        }
     }
 
 

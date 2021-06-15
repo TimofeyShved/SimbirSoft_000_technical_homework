@@ -4,6 +4,11 @@ public class WordCount {
     String word;
     int count;
 
+    WordCount(String word, int count){
+        this.word = word;
+        this.count = count;
+    }
+
     public int getCount() {
         return count;
     }
@@ -12,8 +17,8 @@ public class WordCount {
         return word;
     }
 
-    public void setCount(int amount) {
-        this.count = amount;
+    public void setCount(int count) {
+        this.count = count;
     }
 
     public void setWord(String word) {
