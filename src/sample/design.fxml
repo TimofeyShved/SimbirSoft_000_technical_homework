@@ -17,9 +17,10 @@
                       <Label text="URL: " textAlignment="RIGHT" />
                       <TextField fx:id="nameURL" prefHeight="26.0" prefWidth="190.0" />
                       <Button mnemonicParsing="false" onMouseClicked="#start" text="Начать" />
+                      <Label text=" " fx:id="status" textAlignment="RIGHT" />
                      </children>
                   </HBox>
-            <TextArea fx:id="theWords" />
+            <TextArea fx:id="phrases" />
          </children>
       </VBox>
     </children>
