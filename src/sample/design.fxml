@@ -8,14 +8,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="199.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="sample.Controller">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="sample.Controller">
     <children>
       <VBox>
          <children>
                   <HBox alignment="CENTER" prefHeight="37.0" prefWidth="300.0">
                      <children>
                       <Label text="URL: " textAlignment="RIGHT" />
-                      <TextField fx:id="nameURL" prefHeight="26.0" prefWidth="190.0" />
+                      <TextField fx:id="nameURL" prefHeight="26.0" prefWidth="250.0" />
                       <Button mnemonicParsing="false" onMouseClicked="#start" text="Начать" />
                       <Label text=" " fx:id="status" textAlignment="RIGHT" />
                      </children>
