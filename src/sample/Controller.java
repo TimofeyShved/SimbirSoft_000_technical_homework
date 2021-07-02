@@ -39,7 +39,7 @@ public class Controller {
         zeroing(); // команда обнуления
         status.setText(" Статус: попытка соединения"); // статус
 
-        if(connectURL()){ // соединение
+        if(booleanConnectURL(nameURL.getText())){ // соединение
             status.setText(" Статус: обработка текста");// статус
             wodrs = treatmentParse(text); // разбиение на слова (парсим текст)
 
@@ -63,23 +63,23 @@ public class Controller {
     }
 
     // ---------------------------------------------------------------------- соединение с URL ----------------------
-    private boolean connectURL() throws Exception{
+    public boolean booleanConnectURL(String nameURLconnect) throws Exception{
         try {
-            URL url = new URL(nameURL.getText()); // закидываем нашу ссылку
+            URL url = new URL(nameURLconnect); // закидываем нашу ссылку
             URLConnection urlc = url.openConnection(); // открыть соединение
             urlc.setRequestProperty("User-Agent", "Mozilla 5.0 (Windows; U; "
                     + "Windows NT 5.1; en-US; rv:1.8.0.11) "); // дефолтные настройки браузера соединения
 
             InputStream inputFile = urlc.getInputStream(); // стрим данных приёма
-            status.setText(" Статус: соединение, успех"); // статус
+            //status.setText(" Статус: соединение, успех"); // статус
 
             readerURLtoText(inputFile); // считывание текста из URL
-            status.setText(" Статус: считывание текста из URL, успех"); // статус
+            //status.setText(" Статус: считывание текста из URL, успех"); // статус
             return true;
 
         } catch (Exception e) {
             System.out.println(e.getMessage()); // ошибка (￣ ￣|||)
-            status.setText(" Статус: Error"); // статус
+            //status.setText(" Статус: Error"); // статус
             return false;
         }
     }
@@ -97,12 +97,12 @@ public class Controller {
             }
         } catch (Exception e) {
         System.out.println(e.getMessage()); // ошибка (￣ ￣|||)
-        status.setText(" Статус: Error"); // статус
+        //status.setText(" Статус: Error"); // статус
         }
     }
 
     // ---------------------------------------------------------------------- разбиение на слова (парсим текст) ----------------------
-    private ArrayList<String> treatmentParse(ArrayList<String> text) throws Exception{
+    public ArrayList<String> treatmentParse(ArrayList<String> text) throws Exception{
         ArrayList<String> arrayWodrs = new ArrayList<>();
         try {
             for (String s:text){
@@ -144,7 +144,7 @@ public class Controller {
     }
 
     // ---------------------------------------------------------------------- подсчёт слов ----------------------
-    private ArrayList<WordCount> treatmentCount(ArrayList<String> wodrs) throws Exception{
+    public ArrayList<WordCount> treatmentCount(ArrayList<String> wodrs) throws Exception{
         ArrayList<WordCount> wordCounts = new ArrayList<>();
 
         for (String s:wodrs){ // цикл по перебору символов в строке
@@ -165,8 +165,4 @@ public class Controller {
 
         return wordCounts;// возвращаем коллекцию
     }
-
-
-
-
 }

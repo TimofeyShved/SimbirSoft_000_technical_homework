@@ -24,4 +24,6 @@ public class WordCount {
     public void setWord(String word) {
         this.word = word;
     }
+
+    public String toString() {return this.word+"/"+this.count;}
 }
