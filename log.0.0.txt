@@ -274,3 +274,67 @@ INFO: Открыта БД, успех!
 INFO: Таблица создана, успех!
 июл 04, 2021 4:15:43 AM sample.Controller start
 INFO:  Статус: сохранение в БД, успех!
+июл 04, 2021 4:23:17 AM sample.Controller start
+INFO:  Статус: проверка настроек
+июл 04, 2021 4:23:17 AM sample.Controller start
+INFO:  Статус: попытка соединения
+июл 04, 2021 4:23:20 AM sample.Controller booleanConnectURL
+INFO:  Статус: соединение, успех
+июл 04, 2021 4:23:20 AM sample.Controller readerURLtoText
+WARNING: А-Яа-я
+июл 04, 2021 4:23:20 AM sample.Controller booleanConnectURL
+INFO:  Статус: считывание текста из URL, успех
+июл 04, 2021 4:23:20 AM sample.Controller start
+INFO:  Статус: обработка текста, успех!
+июл 04, 2021 4:23:20 AM sample.Controller start
+INFO:  Статус: подсчёт слов, успех!
+июл 04, 2021 4:23:20 AM sample.Controller start
+INFO:  Статус: вывод слов, успех!
+июл 04, 2021 4:23:20 AM sample.Controller SaveJDBC
+INFO: Открыта БД, успех!
+июл 04, 2021 4:23:20 AM sample.Controller SaveJDBC
+INFO: Таблица создана, успех!
+июл 04, 2021 4:23:20 AM sample.Controller start
+INFO:  Статус: сохранение в БД, успех!
+июл 04, 2021 4:25:48 AM sample.Controller start
+INFO:  Статус: проверка настроек
+июл 04, 2021 4:25:49 AM sample.Controller start
+INFO:  Статус: попытка соединения
+июл 04, 2021 4:25:51 AM sample.Controller booleanConnectURL
+INFO:  Статус: соединение, успех
+июл 04, 2021 4:25:51 AM sample.Controller readerURLtoText
+WARNING: А-Яа-я
+июл 04, 2021 4:25:51 AM sample.Controller booleanConnectURL
+INFO:  Статус: считывание текста из URL, успех
+июл 04, 2021 4:25:51 AM sample.Controller start
+INFO:  Статус: обработка текста, успех!
+июл 04, 2021 4:25:51 AM sample.Controller start
+INFO:  Статус: подсчёт слов, успех!
+июл 04, 2021 4:25:51 AM sample.Controller start
+INFO:  Статус: вывод слов, успех!
+июл 04, 2021 4:25:51 AM sample.Controller SaveJDBC
+INFO: Открыта БД, успех!
+июл 04, 2021 4:25:52 AM sample.Controller SaveJDBC
+INFO: Таблица создана, успех!
+июл 04, 2021 4:25:52 AM sample.Controller start
+INFO:  Статус: сохранение в БД, успех!
+июл 04, 2021 4:27:35 AM sample.Controller start
+INFO:  Статус: проверка настроек
+июл 04, 2021 4:27:35 AM sample.Controller start
+INFO:  Статус: попытка соединения
+июл 04, 2021 4:27:38 AM sample.Controller booleanConnectURL
+INFO:  Статус: соединение, успех
+июл 04, 2021 4:27:38 AM sample.Controller booleanConnectURL
+INFO:  Статус: считывание текста из URL, успех
+июл 04, 2021 4:27:38 AM sample.Controller start
+INFO:  Статус: обработка текста, успех!
+июл 04, 2021 4:27:38 AM sample.Controller start
+INFO:  Статус: подсчёт слов, успех!
+июл 04, 2021 4:27:39 AM sample.Controller start
+INFO:  Статус: вывод слов, успех!
+июл 04, 2021 4:27:39 AM sample.Controller SaveJDBC
+INFO: Открыта БД, успех!
+июл 04, 2021 4:28:45 AM sample.Controller SaveJDBC
+INFO: Таблица создана, успех!
+июл 04, 2021 4:28:45 AM sample.Controller start
+INFO:  Статус: сохранение в БД, успех!

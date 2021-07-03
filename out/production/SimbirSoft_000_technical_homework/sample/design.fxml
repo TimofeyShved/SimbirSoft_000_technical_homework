@@ -23,6 +23,12 @@
                   </HBox>
                  <HBox alignment="CENTER" prefHeight="37.0" prefWidth="300.0">
                      <children>
+                         <Label text="Кодировка: " textAlignment="RIGHT" />
+                         <ComboBox fx:id="codeURL" prefHeight="26.0" prefWidth="250.0" />
+                     </children>
+                 </HBox>
+                 <HBox alignment="CENTER" prefHeight="37.0" prefWidth="300.0">
+                     <children>
                          <Label text="Выбор языка отбора (ru, en, 0-9): " textAlignment="RIGHT" />
                          <ComboBox fx:id="choiceLanguage" prefHeight="26.0" prefWidth="250.0" />
                      </children>

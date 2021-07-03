@@ -45,8 +45,9 @@ public class Controller {
     @FXML Label status; // статус действий
     @FXML ComboBox choiceLanguage; // выбор языка
     @FXML ComboBox saveJDBC; // возможность сохранять в бд
+    @FXML ComboBox codeURL; // кодировка URL
 
-    String Language;
+    String Language, Code;
     Boolean Save;
 
 
@@ -62,13 +63,20 @@ public class Controller {
         Save = true;
         saveJDBC.getItems().addAll("Да", "Нет");// добавлние полей
 
+        codeURL.setValue("UTF-8"); // устанавливаем выбранный элемент по умолчанию
+        Code = codeURL.getValue().toString();
+        codeURL.getItems().addAll("UTF-8", "UTF-16", "windows-1251");// добавлние полей
+
     }
 
     public void start(MouseEvent event) throws Exception {
 
         LOGGER.log(Level.INFO," Статус: проверка настроек");
         zeroing(); // команда обнуления
+
         Language = choiceLanguage.getValue().toString();
+        Code = codeURL.getValue().toString();
+
         String save = saveJDBC.getValue().toString();
         if (save.equals("Да")){Save=true;}else{Save=false;}
 
@@ -131,7 +139,7 @@ public class Controller {
     // ---------------------------------------------------------------------- считывание текста из URL
     private void readerURLtoText(InputStream inputFile) throws Exception{
         try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputFile, "UTF-8")); //буфер чтения
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputFile, Code)); //буфер чтения
 
             while (true) { // цикл на чтение данных из буфера, по строчке
                 String line = reader.readLine();
@@ -235,6 +243,7 @@ public class Controller {
             stmt.executeUpdate(sql); // обновить бд
 
             //-------------------------------------------------- Заполнение
+            LOGGER.log(Level.INFO,"Да, он думает долго, но он сохраняет данные в бд");
             int i=1;
             for (WordCount w:wordCounts){ // цикл по перебору слов и чисел
                 sql = "INSERT INTO CountWord (ID,Word,CountWord) " +
