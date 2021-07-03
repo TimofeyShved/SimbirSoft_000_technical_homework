@@ -14,6 +14,9 @@ import java.net.MalformedURLException;
 
 import java.net.URL;
 import java.net.URLConnection;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.*;
 
@@ -86,6 +89,11 @@ public class Controller {
                 phrases.setText(phrases.getText()+w.getWord()+"-"+w.getCount()+"\n");
             }
             LOGGER.log(Level.INFO," Статус: вывод слов, успех!");// статус
+
+            if(Save){
+                SaveJDBC();
+                LOGGER.log(Level.INFO," Статус: сохранение в БД, успех!");// статус
+            }
         }
     }
 
@@ -207,7 +215,39 @@ public class Controller {
     }
 
     // ---------------------------------------------------------------------- Сохранение в бд ----------------------
-    public void SaveJDBC(MouseEvent mouseEvent) {
+    public void SaveJDBC() {
+        Connection c = null; // соединение
+        Statement stmt = null; // поток
 
+        try {
+            //-------------------------------------------------- Подключение к БД
+            Class.forName("org.sqlite.JDBC"); // формат бд
+            c = DriverManager.getConnection("jdbc:sqlite:test.db"); // выбираем бд из фалов и соединяемся
+            LOGGER.log(Level.INFO,"Открыта БД, успех!");
+
+            //-------------------------------------------------- Создание таблицы
+            stmt = c.createStatement(); //бд в поток
+            stmt.execute("DROP TABLE IF EXISTS CountWord");
+            String sql = "CREATE TABLE CountWord " +
+                    "(ID INT PRIMARY KEY     NOT NULL," +
+                    " Word           TEXT    NOT NULL, " +
+                    " CountWord            INT     NOT NULL )"; // создание таблицы в sql
+            stmt.executeUpdate(sql); // обновить бд
+
+            //-------------------------------------------------- Заполнение
+            int i=1;
+            for (WordCount w:wordCounts){ // цикл по перебору слов и чисел
+                sql = "INSERT INTO CountWord (ID,Word,CountWord) " +
+                 "VALUES ("+(i)+", '"+w.getWord()+"', "+w.getCount()+" );";
+                stmt.executeUpdate(sql); // обновление действий по запросу sql, втавка полей в бд / INSERT(вставка)
+                i++;
+            }
+            stmt.close(); // закрыть
+            c.close();
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() ); // ошибка
+            LOGGER.log(Level.WARNING, e.toString());
+        }
+        LOGGER.log(Level.INFO,"Таблица создана, успех!");
     }
 }
