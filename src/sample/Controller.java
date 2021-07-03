@@ -6,17 +6,27 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
-import java.io.File;
-import java.io.InputStream;
+import java.io.*;
 import java.net.MalformedURLException;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.logging.*;
 
 public class Controller {
+
+    static Logger LOGGER; // создание логов
+    private static final java.util.logging.LogManager LogManager = null; // лог менеджер
+
+    static {
+        try(FileInputStream ins = new FileInputStream("log.config")){ //полный путь до файла с конфигами
+            LogManager.getLogManager().readConfiguration(ins);  // считывание конфигурации
+            LOGGER = Logger.getLogger(Main.class.getName()); // имя иследуемого класса
+        }catch (Exception ignore){
+            ignore.printStackTrace(); // ошибка
+        }
+    }
 
     // коллекции данных
     ArrayList<String> text = new ArrayList<>();  // полученные и необработанные строчки
@@ -38,18 +48,21 @@ public class Controller {
 
         zeroing(); // команда обнуления
         status.setText(" Статус: попытка соединения"); // статус
-
+        LOGGER.log(Level.INFO," Статус: попытка соединения");
         if(booleanConnectURL(nameURL.getText())){ // соединение
             status.setText(" Статус: обработка текста");// статус
             wodrs = treatmentParse(text); // разбиение на слова (парсим текст)
+            LOGGER.log(Level.INFO," Статус: обработка текста, успех!");
 
             wordCounts = treatmentCount(wodrs); // подсчёт слов
             status.setText(" Статус: подсчёт слов, успех!");// статус
+            LOGGER.log(Level.INFO," Статус: подсчёт слов, успех!");// статус
 
             for (WordCount w:wordCounts){ // TextArea, циклк для вывода наших значений
                 //System.out.println(w.getWord()+"-"+w.getCount());
                 phrases.setText(phrases.getText()+w.getWord()+"-"+w.getCount()+"\n");
             }
+            LOGGER.log(Level.INFO," Статус: вывод слов, успех!");// статус
         }
     }
 
@@ -71,15 +84,15 @@ public class Controller {
                     + "Windows NT 5.1; en-US; rv:1.8.0.11) "); // дефолтные настройки браузера соединения
 
             InputStream inputFile = urlc.getInputStream(); // стрим данных приёма
-            //status.setText(" Статус: соединение, успех"); // статус
+            LOGGER.log(Level.INFO," Статус: соединение, успех"); // статус
 
             readerURLtoText(inputFile); // считывание текста из URL
-            //status.setText(" Статус: считывание текста из URL, успех"); // статус
+            LOGGER.log(Level.INFO," Статус: считывание текста из URL, успех"); // статус
             return true;
 
         } catch (Exception e) {
             System.out.println(e.getMessage()); // ошибка (￣ ￣|||)
-            //status.setText(" Статус: Error"); // статус
+            LOGGER.log(Level.WARNING, e.getMessage()); // статус
             return false;
         }
     }
@@ -96,8 +109,8 @@ public class Controller {
                 text.add(line); // запись полученой сроки в коллекцию строк
             }
         } catch (Exception e) {
-        System.out.println(e.getMessage()); // ошибка (￣ ￣|||)
-        //status.setText(" Статус: Error"); // статус
+            System.out.println(e.getMessage()); // ошибка (￣ ￣|||)
+            LOGGER.log(Level.WARNING, e.getMessage()); // статус
         }
     }
 
@@ -137,30 +150,34 @@ public class Controller {
             }
         } catch (Exception e) {
             System.out.println(e.getMessage()); // ошибка (￣ ￣|||)
-            status.setText(" Статус: Error"); // статус
-
+            LOGGER.log(Level.WARNING, e.getMessage()); // статус
         }
         return arrayWodrs; // возвращаем коллекцию
     }
 
     // ---------------------------------------------------------------------- подсчёт слов ----------------------
     public ArrayList<WordCount> treatmentCount(ArrayList<String> wodrs) throws Exception{
+
         ArrayList<WordCount> wordCounts = new ArrayList<>();
+        try {
+            for (String s:wodrs){ // цикл по перебору символов в строке
+                boolean repeat=false; // повторился
 
-        for (String s:wodrs){ // цикл по перебору символов в строке
-            boolean repeat=false; // повторился
-
-            if(wordCounts!=null){ // если он не пустой
-                for (WordCount w:wordCounts){ // пройтись по новой коллекции
-                    if (w.getWord().equals(s)){ // сравнивая слово с нашими
-                        repeat=true; // нашли, повторение
-                        w.setCount(w.getCount()+1); // увеличили число  (＃￣ω￣)
+                if(wordCounts!=null){ // если он не пустой
+                    for (WordCount w:wordCounts){ // пройтись по новой коллекции
+                        if (w.getWord().equals(s)){ // сравнивая слово с нашими
+                            repeat=true; // нашли, повторение
+                            w.setCount(w.getCount()+1); // увеличили число  (＃￣ω￣)
+                        }
                     }
                 }
+                if (repeat==false){ // не нашли? (￢_￢)
+                    wordCounts.add(new WordCount(s, 1)); // добавили слово  (＃￣ω￣)
+                }
             }
-            if (repeat==false){ // не нашли? (￢_￢)
-                wordCounts.add(new WordCount(s, 1)); // добавили слово  (＃￣ω￣)
-            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage()); // ошибка (￣ ￣|||)
+            LOGGER.log(Level.WARNING, e.getMessage()); // статус
         }
 
         return wordCounts;// возвращаем коллекцию

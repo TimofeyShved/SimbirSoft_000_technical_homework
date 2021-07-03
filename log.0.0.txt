@@ -1,0 +1,12 @@
+июл 03, 2021 10:11:15 PM sample.Controller start
+INFO:  Статус: попытка соединения
+июл 03, 2021 10:11:17 PM sample.Controller booleanConnectURL
+INFO:  Статус: соединение, успех
+июл 03, 2021 10:11:17 PM sample.Controller booleanConnectURL
+INFO:  Статус: считывание текста из URL, успех
+июл 03, 2021 10:11:18 PM sample.Controller start
+INFO:  Статус: обработка текста, успех!
+июл 03, 2021 10:11:18 PM sample.Controller start
+INFO:  Статус: подсчёт слов, успех!
+июл 03, 2021 10:11:20 PM sample.Controller start
+INFO:  Статус: вывод слов, успех!
