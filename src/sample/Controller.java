@@ -1,6 +1,9 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -37,16 +40,36 @@ public class Controller {
     @FXML TextField nameURL;  // ввод нашего URL
     @FXML TextArea phrases; // вывод наших значений
     @FXML Label status; // статус действий
+    @FXML ComboBox choiceLanguage; // выбор языка
+    @FXML ComboBox saveJDBC; // возможность сохранять в бд
+
+    String Language;
+    Boolean Save;
 
 
     // ---------------------------------------------------------------------- инициализация ----------------------
     public void init(){
-        nameURL.setText("https://www.simbirsoft.com/");
-    } // ссылка по умолчанию
+        nameURL.setText("https://www.simbirsoft.com/"); // ссылка по умолчанию
+
+        choiceLanguage.setValue("А-Яа-я"); // устанавливаем выбранный элемент по умолчанию
+        Language = choiceLanguage.getValue().toString();
+        choiceLanguage.getItems().addAll("А-Яа-я","A-Za-z", "A-Za-zА-Яа-я", "A-Za-zА-Яа-я0-9");// добавлние полей
+
+        saveJDBC.setValue("Да"); // устанавливаем выбранный элемент по умолчанию
+        Save = true;
+        saveJDBC.getItems().addAll("Да", "Нет");// добавлние полей
+
+    }
 
     public void start(MouseEvent event) throws Exception {
 
+        LOGGER.log(Level.INFO," Статус: проверка настроек");
         zeroing(); // команда обнуления
+        Language = choiceLanguage.getValue().toString();
+        String save = saveJDBC.getValue().toString();
+        if (save.equals("Да")){Save=true;}else{Save=false;}
+
+
         status.setText(" Статус: попытка соединения"); // статус
         LOGGER.log(Level.INFO," Статус: попытка соединения");
         if(booleanConnectURL(nameURL.getText())){ // соединение
@@ -138,7 +161,7 @@ public class Controller {
                     if(fitsWord==true){ // есть новый символ?
                         newWord+=word.charAt(i); // до? добавь его в будущее слово! (」°ロ°)」
                     } else {
-                        newWord = newWord.replaceAll("[^A-Za-zА-Яа-я0-9]", ""); // очишаем слово от лишнего (＃￣ω￣)
+                        newWord = newWord.replaceAll("[^"+Language+"]", ""); // очишаем слово от лишнего (＃￣ω￣)
 
                         if(newWord!=""){ // если слово есть, то ...
                             arrayWodrs.add(newWord); // закидываем полученное слово в коллекцию
@@ -181,5 +204,10 @@ public class Controller {
         }
 
         return wordCounts;// возвращаем коллекцию
+    }
+
+    // ---------------------------------------------------------------------- Сохранение в бд ----------------------
+    public void SaveJDBC(MouseEvent mouseEvent) {
+
     }
 }

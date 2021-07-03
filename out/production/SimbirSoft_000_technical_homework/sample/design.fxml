@@ -8,7 +8,8 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="sample.Controller">
+<?import javafx.scene.control.ComboBox?>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
     <children>
       <VBox>
          <children>
@@ -20,6 +21,18 @@
                       <Label text=" " fx:id="status" textAlignment="RIGHT" />
                      </children>
                   </HBox>
+                 <HBox alignment="CENTER" prefHeight="37.0" prefWidth="300.0">
+                     <children>
+                         <Label text="Выбор языка отбора (ru, en, 0-9): " textAlignment="RIGHT" />
+                         <ComboBox fx:id="choiceLanguage" prefHeight="26.0" prefWidth="250.0" />
+                     </children>
+                 </HBox>
+                 <HBox alignment="CENTER" prefHeight="37.0" prefWidth="300.0">
+                     <children>
+                         <Label text="Сохранить результат в бд? " textAlignment="RIGHT" />
+                         <ComboBox fx:id="saveJDBC" prefHeight="26.0" prefWidth="250.0" />
+                     </children>
+                 </HBox>
             <TextArea fx:id="phrases" />
          </children>
       </VBox>

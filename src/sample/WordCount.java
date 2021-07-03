@@ -1,8 +1,8 @@
 package sample;
 
 public class WordCount {
-    String word;
-    int count;
+    private String word;
+    private int count;
 
     WordCount(String word, int count){
         this.word = word;
